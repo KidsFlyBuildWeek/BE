@@ -15,6 +15,10 @@ public class Trip {
     @Column(nullable = false)
     private int passengercount;
     @Column(nullable = false)
+    private int childcount;
+    @Column(nullable = false)
+    private String airport;
+    @Column(nullable = false)
     private String luggagetype;
 
     @ManyToOne
@@ -27,15 +31,33 @@ public class Trip {
     @JsonIgnoreProperties("trips")
     private StaffUser staffuser;
 
-    public Trip(String date, int passengercount, String luggagetype, ParentUser parentuser) {
+    public Trip(String date, int passengercount, int childcount, String airport, String luggagetype, ParentUser parentuser) {
         this.date = date;
         this.passengercount = passengercount;
+        this.childcount = childcount;
+        this.airport = airport;
         this.luggagetype = luggagetype;
         this.parentuser = parentuser;
         this.staffuser = null;
     }
 
     public Trip() {
+    }
+
+    public String getAirport() {
+        return airport;
+    }
+
+    public void setAirport(String airport) {
+        this.airport = airport;
+    }
+
+    public int getChildcount() {
+        return childcount;
+    }
+
+    public void setChildcount(int childcount) {
+        this.childcount = childcount;
     }
 
     public long getTripid() {

@@ -4,11 +4,15 @@ import com.lambdaschool.kidsfly.models.StaffUser;
 import com.lambdaschool.kidsfly.models.Trip;
 import com.lambdaschool.kidsfly.repos.StaffUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Transactional
+@Service(value= "staffUserService")
 public class StaffUserServiceImpl implements StaffUserService {
     @Autowired
     private StaffUserRepository staffuserrepos;
@@ -21,7 +25,7 @@ public class StaffUserServiceImpl implements StaffUserService {
     }
 
     @Override
-    public StaffUser findStaffById(long id) {
+    public StaffUser findStaffUserById(long id) {
         return staffuserrepos.findById(id).orElseThrow(()->new EntityNotFoundException("Id" + id));
     }
 
@@ -40,8 +44,34 @@ public class StaffUserServiceImpl implements StaffUserService {
         return staffuserrepos.save(newStaffUser);
     }
 
+    // String name, String status, String birthdate, String location
     @Override
     public StaffUser update(StaffUser staffuser, long id) {
-        return null;
+        StaffUser currentStaffUser = staffuserrepos.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+
+        if(staffuser.getName() != null){
+            currentStaffUser.setName(staffuser.getName());
+        }
+
+        if(staffuser.getStatus() != null){
+            currentStaffUser.setStatus(staffuser.getStatus());
+        }
+
+        if(staffuser.getBirthdate() != null){
+            currentStaffUser.setBirthdate(staffuser.getBirthdate());
+        }
+
+        if(staffuser.getLocation() != null){
+            currentStaffUser.setLocation(staffuser.getLocation());
+        }
+
+        if(staffuser.getTrips().size() > 0){
+            for (Trip t : staffuser.getTrips())
+            {
+                currentStaffUser.getTrips().add(new Trip(t.getDate(), t.getPassengercount(), t.getChildcount(), t.getAirport(), t.getLuggagetype(), t.getParentuser()));
+            }
+        }
+
+        return staffuserrepos.save(currentStaffUser);
     }
 }

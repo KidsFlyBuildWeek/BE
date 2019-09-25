@@ -7,7 +7,7 @@ import java.util.List;
 public interface StaffUserService {
     List<StaffUser> findAll();
 
-    StaffUser findStaffById(long id);
+    StaffUser findStaffUserById(long id);
 
     StaffUser save(StaffUser staffuser);
 

@@ -36,6 +36,9 @@ public class ParentUserServiceImpl implements ParentUserService{
     public ParentUser save(ParentUser parentuser) {
         ParentUser newParentUser = new ParentUser();
 
+        newParentUser.setUsername(parentuser.getUsername());
+        newParentUser.setPassword(parentuser.getPassword());
+        newParentUser.setPhone(parentuser.getPhone());
         newParentUser.setEmail(parentuser.getEmail());
         newParentUser.setName(parentuser.getName());
         newParentUser.setAddress(parentuser.getAddress());
@@ -50,6 +53,18 @@ public class ParentUserServiceImpl implements ParentUserService{
 
         ParentUser currentParentUser = parentuserrepos.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+
+        if(parentuser.getUsername() != null){
+            currentParentUser.setUsername(parentuser.getUsername());
+        }
+
+        if(parentuser.getPassword() != null){
+            currentParentUser.setPassword(parentuser.getPassword());
+        }
+
+        if(parentuser.getPhone() != null){
+            currentParentUser.setPhone(parentuser.getPhone());
+        }
 
         if (parentuser.getEmail() != null){
             currentParentUser.setEmail(parentuser.getEmail());
@@ -74,7 +89,7 @@ public class ParentUserServiceImpl implements ParentUserService{
         if (parentuser.getTrips().size() > 0 ){
             for (Trip t : parentuser.getTrips())
             {
-                currentParentUser.getTrips().add(new Trip(t.getDate(), t.getPassengercount(), t.getLuggagetype(), currentParentUser));
+                currentParentUser.getTrips().add(new Trip(t.getDate(), t.getPassengercount(), t.getChildcount(), t.getAirport(), t.getLuggagetype(), currentParentUser));
             }
         }
 

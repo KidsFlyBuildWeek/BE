@@ -42,7 +42,7 @@ public class ParentUserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(value = "8", produces = {"application/json"}, consumes = {"application/json"})
+    @PostMapping(value = "/parents/new", produces = {"application/json"}, consumes = {"application/json"})
     public ResponseEntity<?> addNewParentUser(@Valid @RequestBody ParentUser newParentUser) throws URISyntaxException {
         newParentUser = parentuserservice.save(newParentUser);
 

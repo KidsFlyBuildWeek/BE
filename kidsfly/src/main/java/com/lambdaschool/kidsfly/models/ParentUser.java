@@ -15,6 +15,13 @@ public class ParentUser {
     private long parentid;
     @Column(unique = true,
             nullable = false)
+    private String username;
+    @Column(nullable = false)
+    private String password;
+    @Column(nullable = false)
+    private String phone;
+    @Column(unique = true,
+            nullable = false)
     private String email;
     @Column(nullable = false)
     private String name;
@@ -32,13 +39,15 @@ public class ParentUser {
 
     // constructors
 
-    public ParentUser(String email, String name, String address, String airport) {
-        this.parentid = parentid;
+
+    public ParentUser(String username, String password, String phone, String email, String name, String address, String airport) {
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
         this.email = email;
         this.name = name;
         this.address = address;
         this.airport = airport;
-        this.status = "pending";
     }
 
     public ParentUser() {
@@ -46,6 +55,31 @@ public class ParentUser {
 
 
     // getters and setters
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public long getParentid() {
         return parentid;

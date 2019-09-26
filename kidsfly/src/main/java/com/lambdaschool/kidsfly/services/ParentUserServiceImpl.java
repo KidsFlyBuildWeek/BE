@@ -89,7 +89,7 @@ public class ParentUserServiceImpl implements ParentUserService{
         if (parentuser.getTrips().size() > 0 ){
             for (Trip t : parentuser.getTrips())
             {
-                currentParentUser.getTrips().add(new Trip(t.getDate(), t.getPassengercount(), t.getChildcount(), t.getAirport(), t.getLuggagetype(), currentParentUser));
+                currentParentUser.getTrips().add(new Trip(t.getDate(), t.getPassengercount(), t.getChildcount(), t.getAirport(), t.getLuggagetype(), currentParentUser, t.getStaffUser()));
             }
         }
 

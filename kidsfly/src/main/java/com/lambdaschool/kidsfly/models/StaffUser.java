@@ -13,6 +13,15 @@ public class StaffUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long staffid;
+    @Column(unique = true,
+           nullable = false)
+    private String username;
+    @Column(nullable = false)
+    private String password;
+    @Column(nullable = false)
+    private String phone;
+    @Column(nullable = false)
+    private String email;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
@@ -25,7 +34,11 @@ public class StaffUser {
     @JsonIgnoreProperties("staffuser")
     private List<Trip> trips = new ArrayList<>();
 
-    public StaffUser(String name, String status, String birthdate, String location) {
+    public StaffUser(String username, String password, String phone, String email, String name, String status, String birthdate, String location) {
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
+        this.email = email;
         this.name = name;
         this.status = status;
         this.birthdate = birthdate;
@@ -33,6 +46,38 @@ public class StaffUser {
     }
 
     public StaffUser() {
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getBirthdate() {

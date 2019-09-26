@@ -35,6 +35,10 @@ public class StaffUserServiceImpl implements StaffUserService {
     public StaffUser save(StaffUser staffuser) {
         StaffUser newStaffUser = new StaffUser();
 
+        newStaffUser.setUsername(staffuser.getUsername());
+        newStaffUser.setPassword(staffuser.getPassword());
+        newStaffUser.setPhone(staffuser.getPhone());
+        newStaffUser.setEmail(staffuser.getEmail());
         newStaffUser.setName(staffuser.getName());
         newStaffUser.setBirthdate(staffuser.getBirthdate());
         newStaffUser.setLocation(staffuser.getLocation());
@@ -48,6 +52,14 @@ public class StaffUserServiceImpl implements StaffUserService {
     @Override
     public StaffUser update(StaffUser staffuser, long id) {
         StaffUser currentStaffUser = staffuserrepos.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+
+        if(staffuser.getUsername() != null){
+            currentStaffUser.setUsername(staffuser.getUsername());
+        }
+
+        if(staffuser.getPassword() != null){
+            currentStaffUser.setPassword(staffuser.getPassword());
+        }
 
         if(staffuser.getName() != null){
             currentStaffUser.setName(staffuser.getName());
@@ -68,7 +80,7 @@ public class StaffUserServiceImpl implements StaffUserService {
         if(staffuser.getTrips().size() > 0){
             for (Trip t : staffuser.getTrips())
             {
-                currentStaffUser.getTrips().add(new Trip(t.getDate(), t.getPassengercount(), t.getChildcount(), t.getAirport(), t.getLuggagetype(), t.getParentuser()));
+                currentStaffUser.getTrips().add(new Trip(t.getDate(), t.getPassengercount(), t.getChildcount(), t.getAirport(), t.getLuggagetype(), t.getParentuser(), staffuser));
             }
         }
 

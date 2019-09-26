@@ -31,7 +31,7 @@ public class Trip {
     @JsonIgnoreProperties("trips")
     private StaffUser staffuser;
 
-    public Trip(String date, int passengercount, int childcount, String airport, String luggagetype, ParentUser parentuser) {
+    public Trip(String date, int passengercount, int childcount, String airport, String luggagetype, ParentUser parentuser, StaffUser staffuser) {
         this.date = date;
         this.passengercount = passengercount;
         this.childcount = childcount;
